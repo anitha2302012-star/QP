@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card card-h mb-4"><div class="card-body">
+<h4>{{ paper.subject_code }} - {{ paper.subject_name }}</h4>
+<table class="table table-sm w-auto">
+<tr><th>Department</th><td>{{ paper.department }}</td></tr><tr><th>Regulation</th><td>{{ paper.regulation }}</td></tr>
+<tr><th>Academic year</th><td>{{ paper.academic_year }}</td></tr><tr><th>Semester</th><td>{{ paper.semester }}</td></tr>
+<tr><th>Exam type</th><td>{{ paper.get_exam_type_display }}</td></tr>
+<tr><th>Uploaded by</th><td>{{ paper.uploaded_by.name|default:"(removed user)" }} on {{ paper.uploaded_at|date:"d M Y, H:i" }}</td></tr></table>
+<a class="btn btn-brand" href="{% url 'download' paper.pk %}">Download PDF</a>
+<a class="btn btn-outline-dark" target="_blank" href="{% url 'download' paper.pk %}?inline=1">View in browser</a>
+{% if can_delete %}<a class="btn btn-outline-danger" href="{% url 'delete_paper' paper.pk %}">Delete</a>{% endif %}
+</div></div>
+{% if related %}<h5>Related question papers</h5>{% include 'core/_table.html' with papers=related %}{% endif %}
+{% endblock %}

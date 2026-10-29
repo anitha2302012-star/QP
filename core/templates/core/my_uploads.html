@@ -1,0 +1,5 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h4>{% if admin_view %}All Question Papers{% else %}My Uploads{% endif %}</h4>
+{% include 'core/_table.html' with papers=papers %}
+{% endblock %}

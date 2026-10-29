@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h4>Search Question Papers</h4>
+<form class="card card-h p-3 mb-3"><div class="row g-2">
+  <div class="col-md-12"><input name="q" value="{{ get.q }}" class="form-control" placeholder="Keyword: subject name, code, department..."></div>
+  <div class="col-md-2"><select name="department" class="form-select"><option value="">Department</option>{% for d in departments %}<option {% if get.department == d %}selected{% endif %}>{{ d }}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><select name="regulation" class="form-select"><option value="">Regulation</option>{% for d in regulations %}<option {% if get.regulation == d %}selected{% endif %}>{{ d }}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><select name="academic_year" class="form-select"><option value="">Year</option>{% for d in years %}<option {% if get.academic_year == d %}selected{% endif %}>{{ d }}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><select name="semester" class="form-select"><option value="">Semester</option>{% for s in semesters %}<option value="{{ s }}" {% if get.semester == s|stringformat:'s' %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><select name="exam_type" class="form-select"><option value="">Exam type</option>{% for v, l in exam_types %}<option value="{{ v }}" {% if get.exam_type == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select></div>
+  <div class="col-md-2 d-grid"><button class="btn btn-brand">Search</button></div>
+</div></form>
+{% include 'core/_table.html' with papers=page %}
+<nav>{% if page.has_previous %}<a class="btn btn-sm btn-outline-dark" href="?{{ params }}&page={{ page.previous_page_number }}">Previous</a>{% endif %}
+<span class="mx-2">Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+{% if page.has_next %}<a class="btn btn-sm btn-outline-dark" href="?{{ params }}&page={{ page.next_page_number }}">Next</a>{% endif %}</nav>
+{% endblock %}

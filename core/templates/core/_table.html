@@ -1,0 +1,10 @@
+<div class="table-responsive"><table class="table table-hover bg-white align-middle">
+<thead class="table-light"><tr><th>Code</th><th>Subject</th><th>Dept</th><th>Sem</th><th>Exam</th><th>Year</th><th>Reg</th><th></th></tr></thead>
+<tbody>
+{% for p in papers %}
+<tr><td>{{ p.subject_code }}</td><td>{{ p.subject_name }}</td><td>{{ p.department }}</td><td>{{ p.semester }}</td>
+<td>{{ p.exam_type }}</td><td>{{ p.academic_year }}</td><td>{{ p.regulation }}</td>
+<td class="text-nowrap"><a class="btn btn-sm btn-outline-secondary" href="{% url 'detail' p.pk %}">Details</a>
+<a class="btn btn-sm btn-brand" href="{% url 'download' p.pk %}">Download</a></td></tr>
+{% empty %}<tr><td colspan="8" class="text-center text-muted py-4">No question papers found.</td></tr>{% endfor %}
+</tbody></table></div>

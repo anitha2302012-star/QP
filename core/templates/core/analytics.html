@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h4>Analytics Dashboard</h4>
+<div class="row g-3 mb-4">
+<div class="col-md-2"><div class="card card-h p-3"><small>Papers</small><h3>{{ total_papers }}</h3></div></div>
+<div class="col-md-2"><div class="card card-h p-3"><small>Uploads</small><h3>{{ uploads }}</h3></div></div>
+<div class="col-md-2"><div class="card card-h p-3"><small>Downloads</small><h3>{{ downloads }}</h3></div></div>
+<div class="col-md-2"><div class="card card-h p-3"><small>Views</small><h3>{{ views }}</h3></div></div>
+<div class="col-md-2"><div class="card card-h p-3"><small>Activity today</small><h3>{{ today }}</h3></div></div>
+</div>
+<div class="row g-3 mb-4">
+<div class="col-md-4"><div class="card p-3"><h6>Users by role</h6>{% for r in by_role %}<div>{{ r.role|title }}: <b>{{ r.n }}</b></div>{% endfor %}</div></div>
+<div class="col-md-4"><div class="card p-3"><h6>Papers by department</h6>{% for d in by_dept %}<div>{{ d.department }}: <b>{{ d.n }}</b></div>{% empty %}<span class="text-muted">None yet</span>{% endfor %}</div></div>
+<div class="col-md-4"><div class="card p-3"><h6>Most downloaded</h6>{% for p in top %}<div>{{ p.subject_code }} {{ p.exam_type }}: <b>{{ p.d }}</b></div>{% empty %}<span class="text-muted">No downloads yet</span>{% endfor %}</div></div>
+</div>
+<h5>Recent activity</h5>
+<table class="table table-sm bg-white"><thead class="table-light"><tr><th>Time</th><th>User</th><th>Action</th><th>Paper</th></tr></thead><tbody>
+{% for l in recent %}<tr><td>{{ l.timestamp|date:"d M H:i" }}</td><td>{{ l.user.name|default:"-" }} ({{ l.user.role }})</td><td>{{ l.action }}</td><td>{% if l.paper %}{{ l.paper }}{% else %}{{ l.detail }}{% endif %}</td></tr>{% endfor %}
+</tbody></table>
+{% endblock %}

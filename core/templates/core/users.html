@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3"><h4>Users</h4><a class="btn btn-brand" href="{% url 'user_new' %}">Add user</a></div>
+<table class="table bg-white align-middle"><thead class="table-light"><tr><th>Name</th><th>Email</th><th>Role</th><th>Dept</th><th>Uploads</th><th>Status</th><th></th></tr></thead><tbody>
+{% for u in users %}<tr><td>{{ u.name }}</td><td>{{ u.email }}</td><td>{{ u.get_role_display }}</td><td>{{ u.department }}</td><td>{{ u.n }}</td>
+<td>{% if u.is_active %}<span class="badge bg-success">Active</span>{% else %}<span class="badge bg-secondary">Disabled</span>{% endif %}</td>
+<td class="text-nowrap"><a class="btn btn-sm btn-outline-secondary" href="{% url 'user_edit' u.pk %}">Edit</a>
+<a class="btn btn-sm btn-outline-danger" href="{% url 'user_delete' u.pk %}">Delete</a></td></tr>{% endfor %}
+</tbody></table>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-5"><div class="card card-h shadow-sm"><div class="card-body p-4">
+<h4 class="mb-3">Login</h4>
+<form method="post">{% csrf_token %}
+  <label class="form-label">Email</label>
+  <input type="email" name="email" class="form-control mb-3" required autofocus>
+  <label class="form-label">Password</label>
+  <input type="password" name="password" class="form-control mb-3" required>
+  <button class="btn btn-brand w-100">Login</button>
+</form>
+<p class="text-muted small mt-3 mb-0">Accounts are created by the administrator.</p>
+</div></div></div></div>
+{% endblock %}

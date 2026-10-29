@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card card-h col-md-8"><div class="card-body">
+<h4>Upload Question Paper</h4>
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+{% for f in form %}<div class="mb-3"><label class="form-label">{{ f.label }}</label>{{ f }}
+{% if f.help_text %}<div class="form-text">{{ f.help_text }}</div>{% endif %}
+{% for e in f.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}</div>{% endfor %}
+<button class="btn btn-brand">Upload</button></form></div></div>
+{% endblock %}
